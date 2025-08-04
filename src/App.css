@@ -53,3 +53,18 @@ body {
   align-items: center;
   text-transform: uppercase;
 }
+
+.blinking-cursor {
+  animation: blink 1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    border-bottom: 2px solid black;
+  }
+  51%,
+  100% {
+    border: 2px solid rgb(211, 214, 218);
+  }
+}

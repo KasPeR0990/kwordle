@@ -61,11 +61,15 @@ export default function App() {
       <div className="built-by">built by kasper</div>
       <div className="board">
         {guesses.map((guess, i) => {
-          //
+          // first guess thats null
           const isCurrentGuess = i === guesses.findIndex((val) => val === null);
 
           return (
-            <Line guess={isCurrentGuess ? currentGuess : guess ?? ""} key={i} />
+            <Line
+              guess={isCurrentGuess ? currentGuess : guess ?? ""}
+              key={i}
+              isCurrentGuess={isCurrentGuess}
+            />
           );
         })}
       </div>
@@ -73,13 +77,20 @@ export default function App() {
   );
 }
 
-function Line({ guess }: { guess: string | null }) {
+function Line({
+  guess,
+  isCurrentGuess,
+}: {
+  guess: string | null;
+  isCurrentGuess: boolean;
+}) {
   const tiles = [];
 
   for (let i = 0; i < WORD_LENGTH; i++) {
     const char = guess ? guess[i] : "";
+    const isActiveTile = isCurrentGuess && i === guess?.length;
     tiles.push(
-      <div key={i} className="tile">
+      <div key={i} className={`tile ${isActiveTile ? "blinking-cursor" : ""}`}>
         {char}
       </div>
     );
