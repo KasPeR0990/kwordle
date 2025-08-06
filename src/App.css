@@ -1,70 +1,105 @@
+:root {
+  --correct-color: hsl(145, 63%, 39%);
+  --present-color: hsl(45, 100%, 50%);
+  --absent-color: hsl(220, 9%, 35%);
+  --tile-border: #ccc;
+  --flip-duration: 0.5s;
+}
+
+.App {
+  position: relative;
+}
+
 body {
   font-family: monospace;
   font-weight: bold;
+  background: radial-gradient(circle at top, #1e1e2f, #111);
+  color: white;
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  min-height: 100vh; /* Full viewport height */
-  padding: 20px 0;
-  flex-direction: column; /* Remove default margin */
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 40px 0;
 }
 
 .title {
-  position: absolute;
-  top: -20px; /* Move up from the very top */
-  left: 50%;
-  transform: translateX(-50%); /* Center it horizontally */
-  display: flex;
-  justify-content: center;
-  font-size: 50px;
+  font-size: 4rem;
   margin-bottom: 10px;
+  color: #fff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  align-items: center;
+  display: flex;
 }
 
 .built-by {
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%); /* Center it horizontally */
-  top: 160px;
+  font-size: 1rem;
+  color: #aaa;
+  margin-bottom: 30px;
   text-decoration: underline;
+  align-items: center;
+  display: block;
+  text-align: left;
+  width: 100%;
 }
-
 .board {
   display: flex;
-  gap: 5px;
   flex-direction: column;
-  justify-content: center;
+  gap: 8px;
   align-items: center;
+  margin-top: 100px; /* Adjust this value to move the board down */
 }
 
 .line {
   display: flex;
-  gap: 5px;
+  gap: 8px;
+  justify-content: center;
 }
 
 .tile {
   width: 60px;
   height: 60px;
-  border: 2px solid rgb(211, 214, 218);
-  font-size: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border: 2px solid var(--tile-border);
+  font-size: 2rem;
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+/* Status Colors */
+.tile-correct {
+  background-color: var(--correct-color);
+  border-color: var(--correct-color);
+}
+
+.tile-present {
+  background-color: var(--present-color);
+  border-color: var(--present-color);
+}
+
+.tile-absent {
+  background-color: var(--absent-color);
+  border-color: var(--absent-color);
 }
 
 .blinking-cursor {
+  border-bottom: 2px solid white;
   animation: blink 1s steps(2, start) infinite;
 }
 
 @keyframes blink {
   0%,
   50% {
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid white;
   }
   51%,
   100% {
-    border: 2px solid rgb(211, 214, 218);
+    border-bottom: 2px solid transparent;
   }
 }
